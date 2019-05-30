@@ -19,33 +19,33 @@
 
     {!! Form::open() !!}
 
-        <div class="login">
-            <div class="login-top">登录</div>
-            <div class="login-center clearfix">
-                <div class="login-center-img"><img src="{{ asset('img/admin/name.png') }}"/></div>
-                <div class="login-center-input">
-                    {{--<input type="text" name="tellphone" value="" placeholder="请输入您的用户名/手机号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名/手机号'"/>--}}
-                    {!! Form::text('tellphone', null, ['placeholder' => '请输入您的用户名/手机号', 'onfocus' => "this.placeholder=''", 'onblur' => "this.placeholder='请输入您的用户名/手机号'"]) !!}
-                    <div class="login-center-input-text">用户名</div>
-                </div>
+    <div class="login">
+        <div class="login-top">登录</div>
+        <div class="login-center clearfix">
+            <div class="login-center-img"><img src="{{ asset('img/admin/name.png') }}"/></div>
+            <div class="login-center-input">
+                {{--<input type="text" name="tellphone" value="" placeholder="请输入您的用户名/手机号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名/手机号'"/>--}}
+                {!! Form::text('tellphone', null, ['placeholder' => '请输入您的用户名/手机号', 'onfocus' => "this.placeholder=''", 'onblur' => "this.placeholder='请输入您的用户名/手机号'"]) !!}
+                <div class="login-center-input-text">用户名</div>
             </div>
-            <div class="login-center clearfix">
-                <div class="login-center-img"><img src="{{ asset('img/admin/password.png') }}"/></div>
-                <div class="login-center-input">
-                    {{--<input type="password" name="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>--}}
-                    {!! Form::password('password', ['placeholder' => '请输入您的密码', 'onfocus' => "this.placeholder=''", 'onblur' => "this.placeholder='请输入您的密码'"]) !!}
-                    <div class="login-center-input-text">密码</div>
-                </div>
-            </div>
-            {!! Form::submit('登 陆', ['class' => 'login-button']) !!}
-            {{--<button type="submit" class="login-button">登 陆</button>--}}
-
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
         </div>
+        <div class="login-center clearfix">
+            <div class="login-center-img"><img src="{{ asset('img/admin/password.png') }}"/></div>
+            <div class="login-center-input">
+                {{--<input type="password" name="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>--}}
+                {!! Form::password('password', ['placeholder' => '请输入您的密码', 'onfocus' => "this.placeholder=''", 'onblur' => "this.placeholder='请输入您的密码'"]) !!}
+                <div class="login-center-input-text">密码</div>
+            </div>
+        </div>
+        {!! Form::submit('登 陆', ['class' => 'login-button']) !!}
+        {{--<button type="submit" class="login-button">登 陆</button>--}}
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
 
     {!! Form::close() !!}
 
