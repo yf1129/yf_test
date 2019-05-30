@@ -18,7 +18,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     //登录操作
     Route::post('login', 'AdminController@opLogin');
     //后台登录后主页
-    Route::any('index', 'AdminController@index')->middleware('admin.auth');
+    Route::get('index', 'AdminController@indexView');
 });
 
 

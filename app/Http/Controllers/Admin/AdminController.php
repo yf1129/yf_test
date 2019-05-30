@@ -12,10 +12,12 @@ use Auth;
  */
 class AdminController extends Controller
 {
+    protected $redirectTo = '/admin/index';
+
     /********** 后台管理人员相关 ***************/
     public function __construct()
     {
-//        $this->middleware('admin.auth')->only('index');
+        $this->middleware('auth.admin')->only('indexView');
     }
 
     /**
@@ -45,15 +47,15 @@ class AdminController extends Controller
             return redirect('admin/index');
         } else {
             //登录失败 false
-            return redirect('admin/login')->with('error', '用户名或密码错误');
+            return back()->with('error', '用户名或密码错误');
         }
     }
 
     /**
      * @return string
      */
-    public function index()
+    public function indexView()
     {
-        return 'aa';
+        return view('admin.index');
     }
 }
