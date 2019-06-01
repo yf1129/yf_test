@@ -53,9 +53,22 @@ class AdminController extends Controller
 
     /**
      * @return string
+     * 登录后台主页
      */
     public function indexView()
     {
+        dd(Auth::guard('admin'));
         return view('admin.index');
+    }
+
+    /**
+     * 退出操作
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect('admin/login');
+
     }
 }

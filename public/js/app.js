@@ -49287,7 +49287,11 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    name: null,
+    age: null
+  }
 });
 
 /***/ }),
@@ -49437,8 +49441,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\wamp\www\yf\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\wamp\www\yf\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\wamp\www\yf_test\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\wamp\www\yf_test\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -9,16 +9,16 @@
 |
 */
 
-Auth::routes();
-
 /************* 后台登录相关 ***************/
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin.web'], function () {
     //后台登录视图
-    Route::get('login', 'AdminController@loginView');
+    Route::get('admin/login', 'AdminController@loginView');
     //登录操作
     Route::post('login', 'AdminController@opLogin');
     //后台登录后主页
     Route::get('index', 'AdminController@indexView');
+    //退出
+    Route::get('/logout', 'AdminController@logout');
 });
 
 
