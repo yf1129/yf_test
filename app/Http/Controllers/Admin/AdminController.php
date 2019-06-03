@@ -12,8 +12,6 @@ use Auth;
  */
 class AdminController extends Controller
 {
-    protected $redirectTo = '/admin/index';
-
     /********** 后台管理人员相关 ***************/
     public function __construct()
     {
@@ -43,6 +41,13 @@ class AdminController extends Controller
         ]);
 
         if ($status) {
+            $tellphone = $request->request->get('tellphone');
+            print_r(session('admin'));
+            if (! session('admin')) {
+                $admin_name = \DB::table('admins')->where('tellphone', $tellphone)->value('admin_name');
+                session(['admin' => [$admin_name, $tellphone]]); //把admin值存入session
+            }
+
             //登录成功 true
             return redirect('admin/index');
         } else {
@@ -65,10 +70,11 @@ class AdminController extends Controller
      * 退出操作
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        return redirect('admin/login');
+        $request->session()->forget('admin'); //删除session中的admin值
 
+        return redirect('admin/login');
     }
 }

@@ -32,7 +32,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-{{--                    {{ Auth::guard('admin')->user()->username }}--}}
+                    {{ session('admin')[0] }}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/basic">基本资料</a></dd>

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+//use Illuminate\Auth\SessionGuard;
 
 class Kernel extends HttpKernel
 {
@@ -36,10 +37,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-        'admin.web' => [
+        /*'admin.web' => [
             'web',
             'auth',
-        ],
+        ],*/
 
         'api' => [
             'throttle:60,1',

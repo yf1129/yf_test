@@ -11,13 +11,13 @@
 |
 */
 
+Auth::routes();
+
 include __DIR__.'/Admin/web.php';
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
