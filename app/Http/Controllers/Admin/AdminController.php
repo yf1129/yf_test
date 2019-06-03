@@ -62,7 +62,6 @@ class AdminController extends Controller
      */
     public function indexView()
     {
-        dd(Auth::guard('admin'));
         return view('admin.index');
     }
 
