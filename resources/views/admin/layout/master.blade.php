@@ -37,6 +37,7 @@
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/basic">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
+                    <dd><a href="/admin/modifypwd">修改密码</a></dd>
                     <dd><a href="/admin/logout">退出</a></dd>
                 </dl>
             </li>
@@ -113,13 +114,15 @@
 <script src="{{ asset('lib/layui/layui.js') }}"></script>
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
+    layui.use(['element', 'carousel', 'util', 'laydate', 'layer', 'form', 'layedit'], function(){
+        var element = layui.element
+            , carousel = layui.carousel
+            , util = layui.util
+            , laydate = layui.laydate
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , form = layui.form;
 
-    });
-
-    layui.use('carousel', function(){
-        var carousel = layui.carousel;
         //建造实例
         carousel.render({
             elem: '#test1'
@@ -127,8 +130,21 @@
             ,arrow: 'always' //始终显示箭头
             //,anim: 'updown' //切换动画方式
         });
-    });
 
+        //倒计时
+        var thisTimer, setCountdown = function(y, M, d, H, m, s){
+            var endTime = new Date(y, M||0, d||1, H||0, m||0, s||0) //结束日期
+                ,serverTime = new Date(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+            clearTimeout(thisTimer);
+            util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                var str = '考研倒计时：' + date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                lay('#test2').html(str);
+                thisTimer = timer;
+            });
+        };
+        setCountdown(2019,12,21,0,0,0);
+    });
 </script>
 </body>
 </html>
