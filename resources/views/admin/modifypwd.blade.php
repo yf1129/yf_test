@@ -5,8 +5,9 @@
     <fieldset class="layui-elem-field layui-field-title">
         <legend>管理员密码修改</legend>
     </fieldset>
-    <form class="layui-form layui-form-pane" action="/admin/modifypwd" method="post">
+    <form class="layui-form" action="/admin/modifypwd" method="post">
         {{ csrf_field() }}
+        {{ $errors }}
         <div class="layui-form-item">
             <label class="layui-form-label">原密码</label>
             <div class="layui-input-inline">
@@ -31,8 +32,18 @@
         </div>
 
         <div class="layui-form-item">
-            <button class="layui-btn" lay-filter="demo2" type="submit">修 改</button>
+            <button class="layui-btn" lay-submit="" lay-filter="modifyPwd">修 改</button>
         </div>
     </form>
 
+{{--    <script>--}}
+{{--        layui.use(['element', 'layer', 'form'], function() {--}}
+{{--            var $ = layui.jquery--}}
+{{--                , element = layui.element--}}
+{{--                , layer = layui.layer--}}
+{{--                , form = layui.form;--}}
+
+
+{{--        });--}}
+{{--    </script>--}}
 @endsection

@@ -19,6 +19,8 @@ class MyController extends Controller
 
     public function modifyPwd(AdminPost $request)
     {
+        dd($request);
         echo 33;
+
     }
 }

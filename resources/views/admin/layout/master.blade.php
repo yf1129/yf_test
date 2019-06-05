@@ -115,7 +115,8 @@
 <script>
     //JavaScript代码区域
     layui.use(['element', 'carousel', 'util', 'laydate', 'layer', 'form', 'layedit'], function(){
-        var element = layui.element
+        var $ = layui.jquery
+            , element = layui.element
             , carousel = layui.carousel
             , util = layui.util
             , laydate = layui.laydate
@@ -144,7 +145,19 @@
             });
         };
         setCountdown(2019,12,21,0,0,0);
+
+        //修改密码表单提交
+        //监听提交
+        form.on('submit(modifyPwd)', function(data){
+            console.log(data);
+            return false;
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
     });
 </script>
 </body>
+@include('admin.layout.errors');
 </html>
