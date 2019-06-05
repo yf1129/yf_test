@@ -6,6 +6,7 @@
     <title>媛飞 -- 后台管理</title>
     <meta name="description" content="login">
     <meta name="author" content="YF" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-4.0.0/css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('lib/layui/css/layui.css') }}">
 
@@ -111,53 +112,11 @@
     </div>
 </div>
 
-<script src="{{ asset('lib/layui/layui.js') }}"></script>
-<script>
-    //JavaScript代码区域
-    layui.use(['element', 'carousel', 'util', 'laydate', 'layer', 'form', 'layedit'], function(){
-        var $ = layui.jquery
-            , element = layui.element
-            , carousel = layui.carousel
-            , util = layui.util
-            , laydate = layui.laydate
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , form = layui.form;
+<script src="{{ asset('lib/layui/layui.all.js') }}"></script>
+<script src="{{ asset('js/admin/index.js') }}"></script>
 
-        //建造实例
-        carousel.render({
-            elem: '#test1'
-            ,width: '100%' //设置容器宽度
-            ,arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
-        });
-
-        //倒计时
-        var thisTimer, setCountdown = function(y, M, d, H, m, s){
-            var endTime = new Date(y, M||0, d||1, H||0, m||0, s||0) //结束日期
-                ,serverTime = new Date(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
-
-            clearTimeout(thisTimer);
-            util.countdown(endTime, serverTime, function(date, serverTime, timer){
-                var str = '考研倒计时：' + date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
-                lay('#test2').html(str);
-                thisTimer = timer;
-            });
-        };
-        setCountdown(2019,12,21,0,0,0);
-
-        //修改密码表单提交
-        //监听提交
-        form.on('submit(modifyPwd)', function(data){
-            console.log(data);
-            return false;
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;
-        });
-    });
-</script>
 </body>
-@include('admin.layout.errors');
+
+@include('admin.layout.errors')
+
 </html>

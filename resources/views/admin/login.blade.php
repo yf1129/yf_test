@@ -40,6 +40,13 @@
         {!! Form::submit('登 陆', ['class' => 'login-button']) !!}
         {{--<button type="submit" class="login-button">登 陆</button>--}}
 
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+            </div>
+        @endif
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}

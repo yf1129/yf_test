@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 
 /**
@@ -13,6 +14,9 @@ use Auth;
 class AdminController extends Controller
 {
     /********** 后台管理人员相关 ***************/
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth.admin')->only('indexView');
@@ -35,18 +39,21 @@ class AdminController extends Controller
      */
     public function opLogin(Request $request)
     {
-        $status = Auth::guard('admin')->attempt([
-            'tellphone' => $request->input('tellphone'),
-            'password' => $request->input('password'),
+        //验证登录规则
+        $adminInfo = $this->validate($request, [
+            'tellphone' => 'required',
+            'password'  => 'required'
+        ], [
+            'tellphone.required' => '手机号不能为空',
+            'password.required' => '密码不能为空',
         ]);
 
+        $status = Auth::guard('admin')->attempt($adminInfo);
+
         if ($status) {
-            $tellphone = $request->request->get('tellphone');
-            print_r(session('admin'));
-            if (! session('admin')) {
-                $admin_name = \DB::table('admins')->where('tellphone', $tellphone)->value('admin_name');
-                session(['admin' => [$admin_name, $tellphone]]); //把admin值存入session
-            }
+            $admin_name = Auth::guard("admin")->user()->admin_name;
+            $tellphone = Auth::guard("admin")->user()->tellphone;
+            session(['admin' => [$admin_name, $tellphone]]); //把admin值存入session
 
             //登录成功 true
             return redirect('admin/index');
