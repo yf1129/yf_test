@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Model\Admin\Admin;
 use Auth;
 
 /**
@@ -51,10 +52,6 @@ class AdminController extends Controller
         $status = Auth::guard('admin')->attempt($adminInfo);
 
         if ($status) {
-            $admin_name = Auth::guard("admin")->user()->admin_name;
-            $tellphone = Auth::guard("admin")->user()->tellphone;
-            session(['admin' => [$admin_name, $tellphone]]); //把admin值存入session
-
             //登录成功 true
             return redirect('admin/index');
         } else {

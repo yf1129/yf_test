@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 use Hash;
+use Auth;
 
 class AdminPost extends FormRequest
 {
@@ -25,12 +26,7 @@ class AdminPost extends FormRequest
     {
         //验证用户密码
         Validator::extend('check_password ', function ($attribute, $value, $parameters, $validator) {
-            $admin_password = '';
-            if (!empty(session('admin'))) {
-                $admin_password = \DB::table('admins')->where('tellphone', session('admin')[1])->value('password');
-            }
-
-            return Hash::check($value, $admin_password);
+            return Hash::check($value, Auth::guard('admin')->user()->password);
         });
     }
 

@@ -6,6 +6,8 @@ use App\Http\Requests\AdminPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Model\Admin\Admin;
+use Session;
 
 class MyController extends Controller
 {
@@ -21,8 +23,14 @@ class MyController extends Controller
     public function modifyPwd(AdminPost $request)
     {
         $model = Auth::guard('admin')->user();
-dd($request->input('password'));
-        echo 33;
+        $model->password = bcrypt($request['password']);
+        $status = $model->save();
+        if ($status) {
+            Session::flash('modify_msg', '修改密码成功');//删除session中的admin值
 
+            return redirect('admin/modifypwd');
+        } else {
+            Session::flash('modify_msg', '修改密码失败');
+        }
     }
 }
