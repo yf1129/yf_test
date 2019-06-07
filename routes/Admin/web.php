@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('modifypwd', 'MyController@modifyPwdView');
     //修改密码操作
     Route::post('modifypwd', 'MyController@modifyPwd');
+    //标签
+    Route::resource('operate', 'OperateController');
 });
 
 
