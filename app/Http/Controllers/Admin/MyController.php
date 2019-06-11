@@ -11,6 +11,14 @@ use Session;
 
 class MyController extends Controller
 {
+    public function __construct()
+    {
+        if (empty(Auth::guard('admin')->user())) {
+//            dd(Auth::guard('admin')->user());
+            return redirect('admin/login');
+        }
+    }
+
     /**
      * 修改密码视图
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
