@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-4.0.0/css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('lib/layui/css/layui.css') }}">
+    <script src="{{ asset('lib/layui/layui.js') }}"></script>
+    <script src="{{ asset('js/admin/index.js') }}"></script>
 
 </head>
 <body class="layui-layout-body">
@@ -57,13 +59,10 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">管理员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="operate">管理员列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -118,9 +117,6 @@
         © yf.com {{ date('Y-m-d H:i:s') }} - 底部固定区域
     </div>
 </div>
-
-<script src="{{ asset('lib/layui/layui.all.js') }}"></script>
-<script src="{{ asset('js/admin/index.js') }}"></script>
 
 </body>
 
