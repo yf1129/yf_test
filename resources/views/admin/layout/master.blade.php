@@ -33,7 +33,14 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    {{ Auth::guard('admin')->user()->admin_name }}
+                    @if(empty(Auth::guard('admin')->user()))
+                        @redirect('admin/login')
+                        <input type="hidden" id="admin_name_msg" value="{{ Auth::guard('admin')->user() }}">
+{{--                        {{ dd(empty(Auth::guard('admin')->user()))   view('admin/login') }}--}}
+                    @else
+                        <input type="hidden" id="admin_name_msg" value="{{ Auth::guard('admin')->user()->admin_name }}">
+                        {{ Auth::guard('admin')->user()->admin_name }}
+                    @endif
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/basic">基本资料</a></dd>
