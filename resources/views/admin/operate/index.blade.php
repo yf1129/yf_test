@@ -30,32 +30,84 @@
             </div>
             <div class="layui-tab-item">内容3</div>
             <div class="layui-tab-item">
-                <form class="layui-form" action="">
+                <div class="layui-form layui-form-pane">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">管理员名称</label>
+                        <label class="layui-form-label">标签内容</label>
                         <div class="layui-input-block">
-                            <input type="text" name="admin_name" required  lay-verify="required" placeholder="请输入管理员名称" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" required  lay-verify="required" placeholder="请输入管理员名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+
                     <div class="layui-form-item">
-                        <label class="layui-form-label">密码</label>
-                        <div class="layui-input-inline">
-                            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="layui-form-mid layui-word-aux">请输入5-10位的英文或数字</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">性别</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="男" checked>
-                            <input type="radio" name="sex" value="2" title="女">
-                            <input type="radio" name="sex" value="0" title="保密">
+                            <button class="layui-btn" lay-submit lay-filter="formOperate">添加</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        layui.use('form', function () {
+           var $ = layui.jquery
+               , form = layui.form;
+
+            //监听提交
+            form.on('submit(formOperate)', function(data){
+                var datas = (data.field);
+                console.log(datas);
+                $.post('/admin/operate', datas, function (res) {
+                    console.log(res);
+                });
+                /*$.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '/admin/modifypwd',
+                    data: datas,
+                    dataType: 'json',
+                    async: false,
+                    cache: false,
+                    success: function (data) {
+                        console.log((data));
+                    },
+                    error: function (e) {
+                        console.log((e));
+                        var errors = e.responseJSON.errors;var html = '';
+                        var html = '';
+                        //配置一个透明的询问框
+                        $.each(errors, function (index) {
+                            html += errors[index][0] + "<br/>";
+                        });
+
+                        layer.msg(html, {icon: 7, time: 3000});//3s后自动关闭
+
+                    }
+                });*/
+
+                // $.ajaxSettings.async = false;
+                // $.post('/admin/modifypwd', datas, function (res, status) {
+                //     console.log((status));
+                // }, 'json').error(function(xhr,errorText,errorType){
+                //     var errors = xhr.responseJSON.errors;
+                //     console.log(errors);
+                //     var html = '';
+                //     //配置一个透明的询问框
+                //     $.each(errors, function (index) {
+                //         html += errors[index][0] + "<br/>";
+                //     });
+                //
+                //     layer.msg(html, {icon: 7, time: 3000});//3s后自动关闭
+                // });
+                // layer.msg(html, {icon: 7, time: 3000});//3s后自动关闭
+                // // return false;
+                // $.ajaxSettings.async = true;
+            });
+        });
+    </script>
 
    {{-- <script>
         layui.use('table', function(){
