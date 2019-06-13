@@ -26,6 +26,7 @@ class OperateController extends Controller
     public function create()
     {
         //
+        return view('admin/operate/create');
     }
 
     /**
@@ -37,7 +38,8 @@ class OperateController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request->all());
+//        dd($request->all());
+        return $request;
     }
 
     /**

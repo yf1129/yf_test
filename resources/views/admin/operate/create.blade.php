@@ -3,13 +3,13 @@
 @section('content')
     <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this">网站设置</li>
+            <li>网站设置</li>
             <li>用户管理</li>
             <li>权限分配</li>
-            <li>添加标签</li>
+            <li class="layui-this">添加标签</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">内容1</div>
+            <div class="layui-tab-item">内容1</div>
             <div class="layui-tab-item">
                 <table class="layui-table" lay-data="{height:315, url:'/demo/table/user/', page:true, id:'admin_demo'}" lay-filter="admin_filter">
                     <thead>
@@ -29,8 +29,8 @@
 {{--                <table id="admin_demo" lay-filter="admin_filter"></table>--}}
             </div>
             <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">
-                <div class="layui-form layui-form-pane">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane" action="/admin/ooperate" method="post">
                     {{ csrf_field() }}
                     <div class="layui-form-item">
                         <label class="layui-form-label">标签内容</label>
@@ -41,11 +41,11 @@
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formOperate">添加</button>
+                            <button class="layui-btn" type="submit" lay-filter="formOperate">添加</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -56,13 +56,12 @@
                , form = layui.form;
 
             //监听提交
-            form.on('submit(formOperate)', function(data) {
-                var datas = (data.field);
-                console.log(datas);
-                $.post('/admin/operate', datas, function (res) {
-                    console.log(res);
-                });
-            });
+            // form.on('submit(formOperate)', function(data){
+            //     var datas = (data.field);
+            //     console.log(datas);
+            //     $.post('/admin/operate', datas, function (res) {
+            //         console.log(res);
+            //     });
             //     /*$.ajax({
             //         headers: {
             //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
