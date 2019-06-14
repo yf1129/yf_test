@@ -35,7 +35,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">标签内容</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" required  lay-verify="required" placeholder="请输入新标签名称" autocomplete="off" class="layui-input">
+                            <input type="text" name="name"  lay-verify="required" placeholder="请输入新标签名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
