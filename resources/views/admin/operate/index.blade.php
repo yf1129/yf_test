@@ -58,9 +58,24 @@
             //监听提交
             form.on('submit(formOperate)', function(data) {
                 var datas = (data.field);
-                console.log(datas);
-                $.post('/admin/operate', datas, function (res) {
-                    console.log(res);
+
+                var title_msg = ''; //弹窗提示语
+                $.post('/admin/operate', datas, function (res,status) {
+                    if (! $.isEmptyObject(res) && status === 'success') {
+                        title_msg = '添加标签成功';
+                    } else {
+                        title_msg = '添加标签失败';
+                    }
+                    layer.msg(title_msg, {icon: 7, time: 3000, title: '媛飞工作室 -- 温馨提示'}, function (index) {
+                        window.location.replace('/admin/operate');
+                    });
+                }, 'json').error(function(xhr,errorText,errorType){
+                    var errors = xhr.responseJSON.errors;
+                    //配置一个询问框
+                    $.each(errors, function (index) {
+                        title_msg += errors[index][0] + "<br/>";
+                    });
+                    layer.msg(title_msg, {icon: 7, time: 3000, title: '媛飞工作室 -- 温馨提示'});//3s后自动关闭
                 });
             });
             //     /*$.ajax({

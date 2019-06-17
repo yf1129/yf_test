@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Auth;
 use Hash;
-use Illuminate\Foundation\Http\FormRequest;
 use Validator;
+use App\Model\Admin\Admin;
+use Illuminate\Foundation\Http\FormRequest;
 
 class OperateRequest extends FormRequest
 {
@@ -16,7 +17,8 @@ class OperateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+//        return true;
+        return Auth::guard('admin')->check();
     }
 
     /**
@@ -26,11 +28,9 @@ class OperateRequest extends FormRequest
      */
     public function rules()
     {
-        $this->addValidator();
-
         return [
             //验证规则
-            'name'     => 'sometimes|required',
+            'name'     => 'sometimes|required|max:10',
         ];
     }
 
@@ -38,6 +38,7 @@ class OperateRequest extends FormRequest
     {
         return [
             'name.required'        => '标签名称不能为空',
+            'name.max'             => '标签名不能超过十个字符',
         ];
     }
 }

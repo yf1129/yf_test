@@ -19,7 +19,7 @@
         <div class="layui-logo">媛飞工作室</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item layui-nav-itemed"><a href="">控制台</a></li>
+            <li class="layui-nav-item layui-nav-itemed"><a href="/admin/index">控制台</a></li>
             <li class="layui-nav-item"><a href="">用户</a></li>
             <li class="layui-nav-item"><a href="">关于我</a></li>
             <li class="layui-nav-item">

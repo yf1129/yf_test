@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Validator;
 use Hash;
 use Auth;
+use Validator;
+use App\Model\Admin\Admin;
+use Illuminate\Foundation\Http\FormRequest;
 
 class AdminPost extends FormRequest
 {
@@ -16,7 +17,8 @@ class AdminPost extends FormRequest
      */
     public function authorize()
     {
-        return true;
+//        return true;
+        return Auth::guard('admin')->check();
     }
 
     /**

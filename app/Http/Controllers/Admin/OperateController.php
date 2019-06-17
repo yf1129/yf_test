@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Operate;
 use Illuminate\Http\Request;
+use App\Http\Requests\OperateRequest;
 use App\Http\Controllers\Controller;
+use Session;
 
 class OperateController extends Controller
 {
@@ -31,15 +34,14 @@ class OperateController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 添加标签名称操作
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OperateRequest $request, Operate $model)
     {
-        //
-//        dd($request->all());
-        return $request;
+        $request['created_at'] = date('Y-m-d H:i:s');
+        return $model->create($request->all());
     }
 
     /**

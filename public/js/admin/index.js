@@ -48,7 +48,6 @@ layui.use(['element', 'carousel', 'util', 'laydate', 'layer', 'form', 'layedit']
 
     // 在未登录情况下进行跳转处理
     var admin_name_msg = $('#admin_name_msg').val();
-
     if (admin_name_msg === '') {
         window.location.href = '/admin/login';
     }

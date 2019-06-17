@@ -28,17 +28,22 @@ class MyController extends Controller
         return view('admin.modifypwd');
     }
 
+    /**
+     * @param AdminPost $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * 修改密码操作
+     */
     public function modifyPwd(AdminPost $request)
     {
         $model = Auth::guard('admin')->user();
         $model->password = bcrypt($request['password']);
         $status = $model->save();
+
         if ($status) {
             Session::flash('modify_msg', '修改密码成功');//删除session中的admin值
-
-            return redirect('admin/modifypwd');
         } else {
             Session::flash('modify_msg', '修改密码失败');
         }
+        return redirect('admin/modifypwd');
     }
 }
