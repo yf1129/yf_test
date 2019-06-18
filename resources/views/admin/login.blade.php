@@ -25,7 +25,7 @@
             <div class="login-center-img"><img src="{{ asset('img/admin/name.png') }}"/></div>
             <div class="login-center-input">
                 {{--<input type="text" name="tellphone" value="" placeholder="请输入您的用户名/手机号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名/手机号'"/>--}}
-                {!! Form::text('tellphone', null, ['placeholder' => '请输入您的用户名/手机号', 'autocomplete' => 'off']) !!}
+                {!! Form::text('tellphone', null, ['placeholder' => '请输入您的用户名/手机号']) !!}
                 <div class="login-center-input-text">用户名</div>
             </div>
         </div>
