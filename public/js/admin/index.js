@@ -9,6 +9,13 @@ layui.use(['element', 'carousel', 'util', 'laydate', 'layer', 'form', 'layedit']
         , layedit = layui.layedit
         , form = layui.form;
 
+    //为异步请求设置CSRF令牌
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     //建造实例
     carousel.render({
         elem: '#test1'

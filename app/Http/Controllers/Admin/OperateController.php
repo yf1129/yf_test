@@ -18,7 +18,8 @@ class OperateController extends Controller
     public function index()
     {
         //
-        return view('admin/operate/index');
+        $data = Operate::get();
+        return view('admin/operate/index', compact('data'));
     }
 
     /**
@@ -87,5 +88,11 @@ class OperateController extends Controller
     public function destroy($id)
     {
         //
+        $status = Operate::destroy($id);
+        if ($status) {
+            return response()->json(['code' => 200, 'message' => '删除成功']);
+        } else {
+            return response()->json(['code' => 4401, 'message' => '删除失败']);
+        }
     }
 }

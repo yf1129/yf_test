@@ -3,30 +3,37 @@
 @section('content')
     <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this">网站设置</li>
-            <li>用户管理</li>
+            <li class="layui-this">用户管理</li>
             <li>权限分配</li>
             <li>添加标签</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">内容1</div>
-            <div class="layui-tab-item">
-                <table class="layui-table" lay-data="{height:315, url:'/demo/table/user/', page:true, id:'admin_demo'}" lay-filter="admin_filter">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table" lay-filter="admin_filter" id="admin_demo">
                     <thead>
-                    <tr>
-                        <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-                        <th lay-data="{field:'username', width:80}">用户名</th>
-                        <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-                        <th lay-data="{field:'city'}">城市</th>
-                        <th lay-data="{field:'sign'}">签名</th>
-                        <th lay-data="{field:'experience', sort: true}">积分</th>
-                        <th lay-data="{field:'score', sort: true}">评分</th>
-                        <th lay-data="{field:'classify'}">职业</th>
-                        <th lay-data="{field:'wealth', sort: true}">财富</th>
-                    </tr>
+                        <tr>
+                            <th lay-data="{align:'center'}">ID</th>
+                            <th lay-data="{align:'center'}">用户名</th>
+                            <th lay-data="{align:'center'}">创建时间</th>
+                            <th lay-data="{align:'center'}">操作</th>
+                        </tr>
                     </thead>
+                    <tbody>
+                    @foreach($data as $d)
+                        <tr>
+                            <td lay-data="{align:'center'}">{{ $d['id'] }}</td>
+                            <td lay-data="{align:'center'}">{{ $d['name'] }}</td>
+                            <td lay-data="{align:'center'}">{{ $d['created_at'] }}</td>
+                            <td lay-data="{align:'center'}">
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-success" href="'admin/opeate/{{ $d['id'] }}">编辑</a>
+                                    <a class="btn btn-danger del-tag" href="javascript:;" name="{{ $d['id'] }}">删除</a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
                 </table>
-{{--                <table id="admin_demo" lay-filter="admin_filter"></table>--}}
             </div>
             <div class="layui-tab-item">内容3</div>
             <div class="layui-tab-item">
@@ -35,7 +42,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">标签内容</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name"  lay-verify="required" placeholder="请输入新标签名称" autocomplete="off" class="layui-input">
+                            <input type="text" name="name" lay-verify="required" placeholder="请输入新标签名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
@@ -51,9 +58,11 @@
     </div>
 
     <script>
-        layui.use('form', function () {
-           var $ = layui.jquery
-               , form = layui.form;
+        layui.use(['form','table','layer'], function () {
+            var $ = layui.jquery
+                , form = layui.form
+                , table = layui.table
+                , layer = layui.layer;
 
             //监听提交
             form.on('submit(formOperate)', function(data) {
@@ -123,33 +132,30 @@
             //     // // return false;
             //     // $.ajaxSettings.async = true;
             // });
+
+            //标签删除
+            $('.del-tag').click(function () {
+                var id = this.name;
+                layer.confirm('是否删除标签？', {icon: 3, title:'媛飞工作室温馨提示'}, function(index){
+                    //do something
+                    console.log(22);
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/admin/operate/' + id,
+                        method: 'DELETE',
+                        async: false,
+                        cache: false,
+                        success: function (e) {
+                            layer.msg(e.message, {icon: 1,time: 2000}, function () {
+                                location.reload();
+                            });
+                        }
+                    });
+                });
+            });
         });
     </script>
-
-   {{-- <script>
-        layui.use('table', function(){
-            var table = layui.table;
-
-            //第一个实例
-            table.render({
-                elem: '#admin_demo'
-                ,height: 312
-                // ,url: '/demo/table/user/' //数据接口
-                ,page: true //开启分页
-                ,cols: [[ //表头
-                    {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-                    ,{field: 'username', title: '用户名', width:80}
-                    ,{field: 'sex', title: '性别', width:80, sort: true}
-                    ,{field: 'city', title: '城市', width:80}
-                    ,{field: 'sign', title: '签名', width: 177}
-                    ,{field: 'experience', title: '积分', width: 80, sort: true}
-                    ,{field: 'score', title: '评分', width: 80, sort: true}
-                    ,{field: 'classify', title: '职业', width: 80}
-                    ,{field: 'wealth', title: '财富', width: 135, sort: true}
-                ]]
-            });
-
-        });
-    </script>--}}
 
 @endsection
