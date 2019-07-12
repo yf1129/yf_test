@@ -4,20 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AdminPost;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Auth;
 use App\Model\Admin\Admin;
 use Session;
 
-class MyController extends Controller
+class MyController extends BaseController
 {
-    public function __construct()
+    /*public function __construct()
     {
         if (empty(Auth::guard('admin')->user())) {
 //            dd(Auth::guard('admin')->user());
             return redirect('admin/login');
         }
-    }
+    }*/
 
     /**
      * 修改密码视图

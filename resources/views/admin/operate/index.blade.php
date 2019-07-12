@@ -3,8 +3,7 @@
 @section('content')
     <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this">用户管理</li>
-            <li>权限分配</li>
+            <li class="layui-this">标签管理</li>
             <li>添加标签</li>
         </ul>
         <div class="layui-tab-content">
@@ -25,9 +24,9 @@
                             <td lay-data="{align:'center'}">{{ $d['name'] }}</td>
                             <td lay-data="{align:'center'}">{{ $d['created_at'] }}</td>
                             <td lay-data="{align:'center'}">
-                                <div class="btn-group btn-group-sm">
-                                    <a class="btn btn-success" href="'admin/opeate/{{ $d['id'] }}">编辑</a>
-                                    <a class="btn btn-danger del-tag" href="javascript:;" name="{{ $d['id'] }}">删除</a>
+                                <div class="btn-group btn-group-sm" name="{{ $d['id'] }}">
+                                    <a class="btn btn-success edit-tag" href="javascript:;">编辑</a>
+                                    <a class="btn btn-danger del-tag" href="javascript:;">删除</a>
                                 </div>
                             </td>
                         </tr>
@@ -35,7 +34,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="layui-tab-item">内容3</div>
             <div class="layui-tab-item">
                 <div class="layui-form layui-form-pane">
                     {{ csrf_field() }}
@@ -70,7 +68,7 @@
 
                 var title_msg = ''; //弹窗提示语
                 $.post('/admin/operate', datas, function (res,status) {
-                    if (! $.isEmptyObject(res) && status === 'success') {
+                    if (res.code === 200){
                         title_msg = '添加标签成功';
                     } else {
                         title_msg = '添加标签失败';
@@ -133,9 +131,37 @@
             //     // $.ajaxSettings.async = true;
             // });
 
+            //标签编辑
+            $('.edit-tag').click(function () {
+                var id = $(this).parent().attr('name');
+
+                var html = '<div class="layui-form layui-form-pane" style="padding: 30px 30px 0 30px;">\n' +
+                    '                    {{ csrf_field() }}\n' +
+                    '                    <div class="layui-form-item">\n' +
+                    '                        <label class="layui-form-label">标签内容</label>\n' +
+                    '                        <div class="layui-input-block">\n' +
+                    '                            <input id="tag_id" type="text" lay-verify="required" placeholder="请输入新标签名称" autocomplete="off" class="layui-input" value="'+id+'">\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                </div>';
+
+                layer.open({
+                    type: 1
+                    , content: html
+                    , title: '编辑标签'
+                    , btn: ['编辑标签', '取消']
+                    , yes: function (index, layero) {
+
+                        var tag_id = $('#tag_id').val();
+                        console.log(tag_id);
+                    }
+                });
+            });
+
             //标签删除
             $('.del-tag').click(function () {
-                var id = this.name;
+                var id = $(this).parent().attr('name');
                 layer.confirm('是否删除标签？', {icon: 3, title:'媛飞工作室温馨提示'}, function(index){
                     //do something
                     console.log(22);
@@ -148,7 +174,13 @@
                         async: false,
                         cache: false,
                         success: function (e) {
-                            layer.msg(e.message, {icon: 1,time: 2000}, function () {
+                            var title_msg = '';
+                            if (e.code === 200){
+                                title_msg = '删除标签成功';
+                            } else {
+                                title_msg = '删除标签失败';
+                            }
+                            layer.msg(title_msg, {icon: 1,time: 2000}, function () {
                                 location.reload();
                             });
                         }

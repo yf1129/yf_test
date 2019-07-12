@@ -5,19 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Operate;
 use Illuminate\Http\Request;
 use App\Http\Requests\OperateRequest;
-use App\Http\Controllers\Controller;
 use Session;
 
-class OperateController extends Controller
+class OperateController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
+     * 获取标签列表页
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
         $data = Operate::get();
         return view('admin/operate/index', compact('data'));
     }
@@ -25,16 +24,17 @@ class OperateController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * 添加标签页面
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
         return view('admin/operate/create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
      * 添加标签名称操作
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -42,7 +42,13 @@ class OperateController extends Controller
     public function store(OperateRequest $request, Operate $model)
     {
         $request['created_at'] = date('Y-m-d H:i:s');
-        return $model->create($request->all());
+        $status = $model->create($request->all());
+
+        if ($status) {
+            return $this->success('添加成功');
+        } else {
+            return $this->success('添加失败');
+        }
     }
 
     /**
@@ -59,12 +65,17 @@ class OperateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * 编辑标签页面
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $model = Operate::find($id);
+
+        if ($model) {
+            return view('admin.operate.edit');
+        }
     }
 
     /**
@@ -82,17 +93,18 @@ class OperateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * 删除标签操作
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
         $status = Operate::destroy($id);
+
         if ($status) {
-            return response()->json(['code' => 200, 'message' => '删除成功']);
+            return $this->success('删除成功');
         } else {
-            return response()->json(['code' => 4401, 'message' => '删除失败']);
+            return $this->success('删除失败');
         }
     }
 }

@@ -20,7 +20,7 @@
             <div class="layui-input-inline">
                 <input id="modify_pwd" type="password" name="password" lay-reqText="新密码不能为空" lay-verify="required|alpha_num" placeholder="请输入新密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">请务必填写用户名</div>
+            <div class="layui-form-mid layui-word-aux">新密码请务必完全是字母、数字</div>
         </div>
 
         <div class="layui-form-item">
@@ -28,7 +28,7 @@
             <div class="layui-input-inline">
                 <input type="password" name="password_confirmation" lay-reqText="二次新密码不能为空" lay-verify="required|alpha_num|confirmed" placeholder="请输入二次新密码" autocomplete="off" class="layui-input">
             </div>
-            <div class="layui-form-mid layui-word-aux">请务必填写用户名</div>
+            <div class="layui-form-mid layui-word-aux">二次新密码请务必完全是字母、数字</div>
         </div>
 
         <div class="layui-form-item">
