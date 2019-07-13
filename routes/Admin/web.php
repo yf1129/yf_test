@@ -25,6 +25,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('modifypwd', 'MyController@modifyPwd');
     //resource操作
     Route::resource('operate', 'OperateController');
+    //文章管理
+    Route::resource('articles', 'ArticlesController');
 });
 
 

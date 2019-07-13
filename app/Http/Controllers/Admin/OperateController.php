@@ -74,20 +74,28 @@ class OperateController extends BaseController
         $model = Operate::find($id);
 
         if ($model) {
-            return view('admin.operate.edit');
+            return view('admin.operate.edit', compact('model'));
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * 更新标签操作
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Operate::find($id);
+        $model['name'] = $request['name'];
+        $status = $model->save();
+        if ($status) {
+            return $this->success('编辑成功');
+        } else {
+            return $this->success('编辑失败');
+        }
     }
 
     /**

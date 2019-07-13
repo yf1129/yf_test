@@ -68,19 +68,13 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a class="" href="javascript:;">消息管理</a>
+                    <a class="" href="javascript:;">文章管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="articles">文章列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
