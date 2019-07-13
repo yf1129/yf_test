@@ -58,13 +58,13 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="describe" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">预览图</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="preview_photo" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
@@ -76,15 +76,15 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">推荐</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="否">
-                            <input type="radio" name="sex" value="2" title="是">
+                            <input type="radio" name="recommended" value="1" title="否">
+                            <input type="radio" name="recommended" value="2" title="是">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">上热门</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="不上">
-                            <input type="radio" name="sex" value="2" title="上">
+                            <input type="radio" name="is_hot" value="1" title="不上">
+                            <input type="radio" name="is_hot" value="2" title="上">
                         </div>
                     </div>
 

@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateArticlesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('articles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('uid')->comment('登录用户id');
+            $table->unsignedTinyInteger('del_state')->default(1)->comment('是否删除 1未删除 2已删除');
+            $table->unsignedTinyInteger('is_hot')->default(1)->comment('是否热门 1非热门 2热门');
+            $table->unsignedTinyInteger('recommended')->default(1)->comment('是否推荐 1非推荐 2推荐');
+            $table->string('title', 50)->collation('utf8mb4_unicode_ci')->comment('文章标题');
+            $table->string('describe', 50)->collation('utf8mb4_unicode_ci')->nullable()->comment('文章描述');
+            $table->binary('preview_photo')->nullable()->comment('文章预览图');
+            $table->longText('content')->collation('utf8mb4_unicode_ci')->nullable()->comment('文章内容');
+            $table->unsignedInteger('reading_num')->comment('阅读量');
+            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('articles');
+    }
+}
