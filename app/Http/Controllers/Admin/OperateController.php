@@ -41,6 +41,7 @@ class OperateController extends BaseController
      */
     public function store(OperateRequest $request, Operate $model)
     {
+        dd($request->all());
         $request['created_at'] = date('Y-m-d H:i:s');
         $status = $model->create($request->all());
 

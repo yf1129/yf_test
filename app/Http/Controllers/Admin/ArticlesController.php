@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin\Articles;
-use App\Model\Admin\User;
+//use App\Model\Admin\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ArticlesRequest;
 use App\Http\Controllers\Controller;
 
-class ArticlesController extends Controller
+class ArticlesController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +18,20 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
-        $data = Articles::find(1)->Article()->get();
-//        dd($data);
-        return view('admin.articles.index');
+        $data = Articles::get();
+
+        if (!empty($data)) {
+            foreach ($data as $k=>$v) {
+                $idModel = Articles::find($v['id'])->user()->get();
+                if (!empty($idModel[0])) {
+                    $data[$k]['author'] = $idModel[0]->name;
+                } else {
+                    $data[$k]['author'] = '匿名';
+                }
+            }
+        }
+
+        return view('admin.articles.index',compact('data'));
     }
 
     /**
@@ -36,12 +47,20 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * 添加文章操作
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticlesRequest $request, Articles $model)
     {
-        //
+        $request->offsetSet('created_at', date('Y-m-d H:i:s'));
+        $status = $model->create($request->all());
+
+        if ($status) {
+            return $this->success('添加成功');
+        } else {
+            return $this->success('添加失败');
+        }
     }
 
     /**
@@ -75,7 +94,14 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Articles::find($id);
+        $model['name'] = $request['name'];
+        $status = $model->save();
+        if ($status) {
+            return $this->success('编辑成功');
+        } else {
+            return $this->success('编辑失败');
+        }
     }
 
     /**

@@ -1,5 +1,4 @@
 {{--错误提示--}}
-{{ $errors }}
 @if (count($errors) > 0)
 
     <input type="hidden" id="msg_modify_data" value="{{ $errors }}">

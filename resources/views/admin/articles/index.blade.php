@@ -1,6 +1,12 @@
 @extends('admin.layout.master')
 
 @section('content')
+    <style>
+        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+        .articles-img-delete{position: absolute;margin: 5px 0 0 -40px;font-size: 24px;}
+        a:hover{color: #0056b3;}
+    </style>
+
     <div class="layui-tab">
         <ul class="layui-tab-title">
             <li class="layui-this">文章管理</li>
@@ -14,6 +20,7 @@
                             <th lay-data="{align:'center'}">ID</th>
                             <th lay-data="{align:'center'}">作者</th>
                             <th lay-data="{align:'center'}">文章描述</th>
+                            <th lay-data="{align:'center'}">文章预览图</th>
                             <th lay-data="{align:'center'}">文章是否属于热门</th>
                             <th lay-data="{align:'center'}">文章是否属于推荐</th>
                             <th lay-data="{align:'center'}">文章是否删除</th>
@@ -23,16 +30,37 @@
                         </tr>
                     </thead>
                     <tbody>
-{{--                    @foreach($data as $d)--}}
+                    @foreach($data as $d)
                         <tr>
-{{--                            <td lay-data="{align:'center'}">{{ $d['id'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['name'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['describe'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['articles_hot'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['recommended'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['is_del'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['reading_num'] }}</td>--}}
-{{--                            <td lay-data="{align:'center'}">{{ $d['created_at'] }}</td>--}}
+                            <td lay-data="{align:'center'}">{{ $d['id'] }}</td>
+                            <td lay-data="{align:'center'}">{{ $d['author'] }}</td>
+                            <td lay-data="{align:'center'}">
+                                <a class="" href="javascript:;">{{ $d['describe'] }}</a>
+                            </td>
+                            <td lay-data="{align:'center'}"><img src="data:image/png;base64,{{ ($d['preview_photo']) }}" alt=""></td>
+                            <td lay-data="{align:'center'}">
+                                @if($d['is_hot'] === 2)
+                                    {{  '热门' }}
+                                @else
+                                    {{  '非热门' }}
+                                @endif
+                            </td>
+                            <td lay-data="{align:'center'}">
+                                @if($d['recommended'] === 2)
+                                    {{  '推荐' }}
+                                @else
+                                    {{  '非推荐' }}
+                                @endif
+                            </td>
+                            <td lay-data="{align:'center'}">
+                                @if($d['del_state'] === 2)
+                                    {{  '已删除' }}
+                                @else
+                                    {{  '未删除' }}
+                                @endif
+                            </td>
+                            <td lay-data="{align:'center'}">{{ $d['reading_num'] }}</td>
+                            <td lay-data="{align:'center'}">{{ $d['created_at'] }}</td>
                             <td lay-data="{align:'center'}">
                                 <div class="btn-group btn-group-sm" name_id="">
                                     <a class="btn btn-success edit-tag" href="javascript:;" name="">添加</a>
@@ -43,28 +71,35 @@
                                 </div>
                             </td>
                         </tr>
-{{--                    @endforeach--}}
+                    @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="layui-tab-item">
-                <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form layui-form-pane">
+                    {{ csrf_field() }}
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" lay-verify="title" lay-reqtext="标题是必填项，岂能为空？"  autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入文章标题" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <input type="text" name="describe" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" name="describe" lay-verify="required" placeholder="请输入文章描述" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">预览图</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="preview_photo" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="article_img">上传图片</button>
+                            <div class="layui-upload-list">
+                                <img class="layui-upload-img" id="articles_imgs" />
+                                <i class="layui-icon layui-icon-close-fill articles-img-delete layui-hide"></i>
+                                <input type="hidden" value="" name="preview_photo" />
+                                <p id="articlesImgText"></p>
+                            </div>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
@@ -76,55 +111,118 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">推荐</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="recommended" value="1" title="否">
+                            <input type="radio" name="recommended" value="1" title="否" checked>
                             <input type="radio" name="recommended" value="2" title="是">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">上热门</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="is_hot" value="1" title="不上">
+                            <input type="radio" name="is_hot" value="1" title="不上" checked>
                             <input type="radio" name="is_hot" value="2" title="上">
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="articles_demo">添加文章</button>
+{{--                            lay-submit=""--}}
+                            <button class="layui-btn" lay-submit lay-filter="formArticles">添加文章</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
         </div>
     </div>
 
     <script>
-        layui.use(['form','table','layer', 'layedit'], function () {
+        function getCaption(obj){
+            var index = obj.lastIndexOf("\,");
+            obj = obj.substring(index+1, obj.length);
+ console.log(obj);
+            return obj;
+        }
+        layui.use(['form','table','layer', 'layedit', 'upload'], function () {
             var $ = layui.jquery
                 , form = layui.form
                 , table = layui.table
                 , layer = layui.layer
-                , layedit = layui.layedit;
+                , layedit = layui.layedit
+                , upload = layui.upload;
             form.render();
 
-            //监听提交
-            form.on('submit(formOperate)', function(data) {
-                var datas = (data.field);
+            //证明多图片上传
+            upload.render({
+                elem: '#article_img'
+                // ,url: '/api/upload/'
+                ,auto: false //选择文件后不自动上传
+                // ,bindAction: '#testListAction' //指向一个按钮触发上传
+                ,size: 65     //图片大小 单位kb
+                // ,accept: image/jpeg
+                ,choose: function(obj){
+                    //将每次选择的文件追加到文件队列
+                    var files = obj.pushFile();
+                    var img_src = $('#articles_imgs').attr('src');
+                    console.log(typeof img_src);
+                    if (typeof img_src === "string") {
+                        var demoText = $('#articlesImgText');
+                        demoText.html('<span style="color: #FF5722;">只能上传一张图片</span>');
+                        return false;
+                    }
+                    //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                    obj.preview(function(index, file, result){
+                        console.log(index); //得到文件索引
+                        console.log(file); //得到文件对象
+                        console.log(result); //得到文件base64编码，比如图片
+                        var base64_img = getCaption(result);
+                        console.log(base64_img);
+                        $('#articles_imgs').attr('src', result); //图片链接（base64）
+                        $('input[name="preview_photo"]').val(base64_img);
+                        //obj.resetFile(index, file, '123.jpg'); //重命名文件名，layui 2.3.0 开始新增
+
+                        //这里还可以做一些 append 文件列表 DOM 的操作
+
+                        //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
+                        //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
+                        //删除
+                        $('.articles-img-delete').removeClass('layui-hide');
+                        $('.articles-img-delete').on('click', function(){
+                            delete files[index]; //删除对应的文件
+                            tr.remove();
+                            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                        });
+                    });
+                }
+            });
+
+            //监听添加提交
+            form.on('submit(formArticles)', function(data) {
+                var datas = new Object();
+
+                datas['_token'] = data.field._token;
+                datas['title'] = data.field.title;
+                datas['describe'] = data.field.describe;
+                datas['content'] = data.field.content;
+                datas['preview_photo'] = data.field.preview_photo;
+                datas['is_hot'] = data.field.is_hot;
+                datas['recommended'] = data.field.recommended;
+                datas['uid'] = 1;
 
                 var title_msg = ''; //弹窗提示语
-                $.post('/admin/operate', datas, function (res,status) {
+                $.post('/admin/articles', datas, function (res,status) {
+                    console.log(res);
                     if (res.code === 200){
-                        title_msg = '添加标签成功';
+                        title_msg = '添加标文章成功';
                     } else {
-                        title_msg = '添加标签失败';
+                        title_msg = '添加文章失败';
                     }
                     layer.msg(title_msg, {icon: 7, time: 3000, title: '媛飞工作室 -- 温馨提示'}, function (index) {
-                        window.location.replace('/admin/operate');
+                        window.location.replace('/admin/articles');
                     });
                 }, 'json').error(function(xhr,errorText,errorType){
                     var errors = xhr.responseJSON.errors;
+                    console.log(xhr);
                     //配置一个询问框
                     $.each(errors, function (index) {
                         title_msg += errors[index][0] + "<br/>";
