@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::any('/component/upload', 'Component\UploadController@upload');
+Route::any('/component/filesLists', 'Component\UploadController@filesLists');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 

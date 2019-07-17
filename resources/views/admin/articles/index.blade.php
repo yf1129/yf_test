@@ -92,7 +92,7 @@
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">预览图</label>
-                        <div class="layui-upload">
+                        <div class="layui-input-block">
                             <button type="button" class="layui-btn" id="article_img">上传图片</button>
                             <div class="layui-upload-list">
                                 <img class="layui-upload-img" id="articles_imgs" />
@@ -125,7 +125,6 @@
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-{{--                            lay-submit=""--}}
                             <button class="layui-btn" lay-submit lay-filter="formArticles">添加文章</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
@@ -137,12 +136,13 @@
     </div>
 
     <script>
+        //截取base64的值
         function getCaption(obj){
             var index = obj.lastIndexOf("\,");
             obj = obj.substring(index+1, obj.length);
- console.log(obj);
             return obj;
         }
+
         layui.use(['form','table','layer', 'layedit', 'upload'], function () {
             var $ = layui.jquery
                 , form = layui.form
@@ -153,16 +153,18 @@
             form.render();
 
             //证明多图片上传
-            upload.render({
+            var uploadListIns = upload.render({
                 elem: '#article_img'
-                // ,url: '/api/upload/'
-                ,auto: false //选择文件后不自动上传
+                // , url: '/component/upload/'
+                , auto: false //选择文件后不自动上传
                 // ,bindAction: '#testListAction' //指向一个按钮触发上传
-                ,size: 65     //图片大小 单位kb
-                // ,accept: image/jpeg
+                , size: 2048     //图片大小 单位kb
+                , accept: 'images'
+                , acceptMime: 'image/*'
                 ,choose: function(obj){
                     //将每次选择的文件追加到文件队列
                     var files = obj.pushFile();
+
                     var img_src = $('#articles_imgs').attr('src');
                     console.log(typeof img_src);
                     if (typeof img_src === "string") {
@@ -176,23 +178,26 @@
                         console.log(file); //得到文件对象
                         console.log(result); //得到文件base64编码，比如图片
                         var base64_img = getCaption(result);
-                        console.log(base64_img);
+
                         $('#articles_imgs').attr('src', result); //图片链接（base64）
                         $('input[name="preview_photo"]').val(base64_img);
-                        //obj.resetFile(index, file, '123.jpg'); //重命名文件名，layui 2.3.0 开始新增
-
-                        //这里还可以做一些 append 文件列表 DOM 的操作
-
-                        //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
-                        //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
                         //删除
                         $('.articles-img-delete').removeClass('layui-hide');
                         $('.articles-img-delete').on('click', function(){
                             delete files[index]; //删除对应的文件
-                            tr.remove();
+                            $('#articles_imgs').removeAttr('src');
+                            $(this).addClass('layui-hide');
+                            $('input[name="preview_photo"]').val('');
                             uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                         });
                     });
+                },
+                done:function (res, index, upload) {
+                    console.log(res);
+                },
+                error: function(res, index, upload){
+                    //请求异常回调
+                    console.log(res, index, upload);
                 }
             });
 

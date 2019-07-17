@@ -42,6 +42,10 @@ return [
     */
 
     'disks' => [
+        'attachment' => [
+            'driver' => 'local',
+            'root' => 'attachment',
+        ],
 
         'local' => [
             'driver' => 'local',
