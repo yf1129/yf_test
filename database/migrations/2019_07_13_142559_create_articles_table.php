@@ -16,9 +16,9 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('uid')->comment('登录用户id');
-            $table->unsignedTinyInteger('del_state')->default(1)->comment('是否删除 1未删除 2已删除');
-            $table->unsignedTinyInteger('is_hot')->default(1)->comment('是否热门 1非热门 2热门');
-            $table->unsignedTinyInteger('recommended')->default(1)->comment('是否推荐 1非推荐 2推荐');
+            $table->unsignedTinyInteger('is_delete')->default(0)->comment('是否删除 1未删除 2已删除');
+            $table->unsignedTinyInteger('is_hot')->default(0)->comment('是否热门 1非热门 2热门');
+            $table->unsignedTinyInteger('is_recommended')->default(0)->comment('是否推荐 1非推荐 2推荐');
             $table->string('title', 50)->collation('utf8mb4_unicode_ci')->comment('文章标题');
             $table->string('describe', 50)->collation('utf8mb4_unicode_ci')->nullable()->comment('文章描述');
             $table->binary('preview_photo')->nullable()->comment('文章预览图');

@@ -53,7 +53,7 @@ class ArticlesController extends BaseController
      */
     public function store(ArticlesRequest $request, Articles $model)
     {
-        $request->offsetSet('created_at', date('Y-m-d H:i:s'));
+        //$request->offsetSet('created_at', date('Y-m-d H:i:s'));
         $status = $model->create($request->all());
 
         if ($status) {
