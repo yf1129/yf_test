@@ -16,7 +16,7 @@ Auth::routes();
 include __DIR__.'/Admin/web.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index.home');
 });
 
 Route::any('/component/upload', 'Component\UploadController@upload');
