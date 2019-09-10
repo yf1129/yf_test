@@ -22,11 +22,11 @@ class ArticlesController extends BaseController
 
         if (!empty($data)) {
             foreach ($data as $k=>$v) {
-                $idModel = Articles::find($v['id'])->user()->get();
+                $idModel = Articles::find($v['article_id'])->user()->get();
                 if (!empty($idModel[0])) {
-                    $data[$k]['author'] = $idModel[0]->name;
+                    $data[$k]['article_author'] = $idModel[0]->name;
                 } else {
-                    $data[$k]['author'] = '匿名';
+                    $data[$k]['article_author'] = '无名氏';
                 }
             }
         }

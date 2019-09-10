@@ -89,14 +89,14 @@ layui.use(['form','table','layer', 'layedit', 'upload'], function () {
                 var base64_img = getCaption(result);
 
                 $('#articles_imgs').attr('src', result); //图片链接（base64）
-                $('input[name="preview_photo"]').val(base64_img);
+                $('input[name="article_images"]').val(base64_img);
                 //删除
                 $('.articles-img-delete').removeClass('layui-hide');
                 $('.articles-img-delete').on('click', function(){
                     delete files[index]; //删除对应的文件
                     $('#articles_imgs').removeAttr('src');
                     $(this).addClass('layui-hide');
-                    $('input[name="preview_photo"]').val('');
+                    $('input[name="article_images"]').val('');
                     uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                 });
             });
@@ -114,10 +114,10 @@ layui.use(['form','table','layer', 'layedit', 'upload'], function () {
     form.on('submit(formArticles)', function(data) {
         var datas = new Object();
         datas['_token'] = data.field._token;
-        datas['title'] = data.field.title;
-        datas['description'] = data.field.description;
-        datas['content'] = data.field.content;
-        datas['preview_photo'] = data.field.preview_photo;
+        datas['article_title'] = data.field.article_title;
+        datas['article_describe'] = data.field.article_describe;
+        datas['article_content'] = data.field.content;
+        datas['article_images'] = data.field.article_images;
         datas['is_hot'] = data.field.is_hot;
         datas['is_recommended'] = data.field.is_recommended;
         datas['is_delete'] = 1;

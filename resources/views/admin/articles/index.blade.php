@@ -28,16 +28,16 @@
                     <tbody>
                     @foreach($data as $d)
                         <tr>
-                            <td>{{ $d['id'] }}</td>
-                            <td>{{ $d['author'] }}</td>
+                            <td>{{ $d['article_id'] }}</td>
+                            <td>{{ $d['article_author'] }}</td>
                             <td>
-                                <a class="" href="javascript:;">{{ mb_strlen($d['description']) > 8 ? mb_substr($d['description'], 0, 8).'...' : $d['description'] }}</a>
+                                <a class="" href="javascript:;">{{ mb_strlen($d['article_describe']) > 8 ? mb_substr($d['article_describe'], 0, 8).'...' : $d['article_describe'] }}</a>
                             </td>
                             <td><img src="data:image/png;base64,{{ ($d['preview_photo']) }}" alt=""></td>
                             <td>{{ $d['is_hot'] === 2 ? '热门': '非热门' }}</td>
                             <td>{{ $d['is_recommended'] === 2 ? '推荐': '非推荐' }}</td>
                             <td>{{ $d['is_delete'] === 2 ? '已删除' : '未删除' }}</td>
-                            <td>{{ $d['reading_num'] }}</td>
+                            <td>{{ $d['reading_nums'] }}</td>
                             <td>{{ $d['created_at'] }}</td>
                             <td>
                                 <div class="layui-btn-group" name_id="">
@@ -60,13 +60,13 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" lay-verify="required" placeholder="请输入文章标题" class="layui-input">
+                            <input type="text" name="article_title" lay-verify="required" placeholder="请输入文章标题" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <input type="text" name="description" lay-verify="required" placeholder="请输入文章描述" autocomplete="off" class="layui-input">
+                            <input type="text" name="article_describe" lay-verify="required" placeholder="请输入文章描述" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -76,7 +76,7 @@
                             <div class="layui-upload-list">
                                 <img class="layui-upload-img" id="articles_imgs" />
                                 <i class="layui-icon layui-icon-close-fill articles-img-delete layui-hide"></i>
-                                <input type="hidden" value="" name="preview_photo" />
+                                <input type="hidden" value="" name="article_images" />
                                 <p id="articlesImgText"></p>
                             </div>
                         </div>
