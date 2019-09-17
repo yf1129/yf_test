@@ -62,7 +62,8 @@
   width: 80px;
   height: 28px;
   margin-top: 10px;
-  background: url(../../../img/index/home/logo_white.svg) no-repeat;
+  margin-left: -120px;
+  background: url(../../../img/icon/icon.png) no-repeat;
 }
 .header-nav {
   float: left;
@@ -255,7 +256,7 @@
   background-color: #fff;
 }
 .header-top__fixed .header-logo {
-  background: url(../../../img/index/home/logo_red.svg) no-repeat;
+  background: url(../../../img/icon/icon.png) no-repeat;
 }
 .header-top__fixed .header-nav .item {
   color: #333;
@@ -304,9 +305,34 @@
 .banner .search-text {
   width: 558px;
   height: 36px;
+  color: rgb(255,255,255);
   border: 1px solid rgba(255, 255, 255, .8);
   background-color: rgba(0, 0, 0, .15);
 }
+
+/* WebKit browsers */
+.banner .search-text::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, .5);
+  font-size: 14px;
+}
+/* Mozilla Firefox 4 to 18 */
+.banner .search-text::-moz-placeholder {
+  color: rgba(255, 255, 255, .5);
+  opacity: 1;
+  font-size: 14px;
+}
+/* Mozilla Firefox 19+ */
+.banner .search-text::-moz-placeholder {
+  color: rgba(255, 255, 255, .5);
+  opacity: 1;
+  font-size: 14px;
+}
+/* Internet Explorer 10+ */
+.banner .search-text input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, .5);
+  font-size: 14px;
+}
+
 .banner .search:hover .search-text {
   border: 1px solid rgba(255, 255, 255, 1);
   background-color: rgba(0, 0, 0, .3);
@@ -623,24 +649,30 @@
 .footer-followus {
   position: absolute;
   right: 0;
-  width: 278px;
+  width: 460px;
   height: 162px;
   padding-left: 30px;
   border-left: 1px solid #555;
   border-right: 1px solid #555;
 }
-.footer-followus a.weixin {
+.footer-followus p{
+  margin: 12px auto;
+  font-size: 16px;
+  color: #ddd;
+}
+.footer-followus p.weixin {
   position: relative;
 }
-.footer-followus .orcode {
-  display: none;
-  position: absolute;
-  right: 30px;
-  bottom: 15px;
+
+.footer-followus p.weixin img{
+  width: 70px;
 }
-.footer-followus a.weixin:hover .orcode {
-  display: block;
+
+.footer-followus .public_weixin {
+  left: 172px;
+  bottom: 82px;
 }
+
 .footer-copyright {
   width: 100%;
   height: 60px;
@@ -671,12 +703,12 @@
   width: 40px;
   height: 36px;
   box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  background: rgba(0,0,0,.6) url(../../../img/index/home/elevator_icon.png) no-repeat;
+  background: rgba(14,36,245,.6) url(../../../img/index/home/elevator_icon.png) no-repeat;
   border-radius: 2px;
 }
 #elevator:hover,
 #plus:hover {
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(14,36,245,.9);
 }
 #elevator {
   background-position: 8px 6px;
@@ -800,10 +832,10 @@
   font-size: 16px;
 }
 .user .register .buttons {
-  width: 336px;
-  padding: 22px 0;
+  margin: 20px 55px;
+  width: 300px;
+  padding: 10px 0;
   font-size: 0;
-  margin-left: -25px;
 }
 .user .register .buttons a {
   display: inline-block;
@@ -858,7 +890,7 @@
   margin-right: -10px;
 }
 .user .login .buttons {
-  margin: 15px 0 20px;
+  margin: 20px 80px;
   font-size: 0;
 }
 .user .login .buttons a {

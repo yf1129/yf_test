@@ -1,6 +1,17 @@
 $(function () {
   $('#elevator').backTop();
 
+  //返回顶部导航
+  $('#elevator').click(function () {
+    (function smoothscroll(){
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo (0,currentScroll - (currentScroll/5));
+      }
+    })();
+  });
+
   $(window).scroll(function () {
     if ($(this).scrollTop() >= 300) {
       $('.header-top').addClass('header-top__fixed');

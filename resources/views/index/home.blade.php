@@ -5,9 +5,9 @@
 {{--    <link rel="shortcut icon" href="favicons/1.png') }}">--}}
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>一飞知媛</title>
+    <title>{{ env('app.name', '一飞知媛') }}</title>
     <meta name="description" content="home">
-    <meta name="author" content="YF" />
+    <meta name="author" content="{{ env('app.author', 'YF')}}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-4.0.0/css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('lib/layui/css/layui.css') }}">
@@ -26,11 +26,11 @@
         <div class="container">
             <a href="#" class="header-logo"></a>
             <nav class="header-nav">
-                <a href="#" class="item item-cur">发现</a>
+                <a href="" class="item item-cur"><i class="layui-icon layui-icon-home"></i>首页</a>
                 <a href="#" class="item">最新</a>
                 <a href="#" class="item new-icon">美思<i></i></a>
                 <a href="#" class="item">教育</a>
-                <a href="#" class="nav-more"></a>
+                {{--<a href="#" class="nav-more"></a>
                 <div class="nav-more__hover">
                     <div class="wrapper">
                         <div class="top-part">
@@ -63,7 +63,7 @@
                             <a href="#">博客</a>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </nav>
             <div class="header-user">
                 <a href="#" class="register">注册</a>
@@ -195,7 +195,7 @@
                     </div>
                     <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img8.jpg') }}" alt="#"></a></div>
                     <div class="waterfall-imgbox waterfall-box">
-                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img9.jpg') }}') }}" alt="#"></a>
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img9.jpg') }}" alt="#"></a>
                         <div class="waterfall-collect">
                             <i class="title"></i>
                             <div class="info">
@@ -207,7 +207,7 @@
                 </div>
                 <div class="main-waterfall__row clearfix">
                     <div class="waterfall-imgbox waterfall-box">
-                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img10.jpg') }}') }}" alt="#"></a>
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img10.jpg') }}" alt="#"></a>
                         <div class="waterfall-collect">
                             <i class="title"></i>
                             <div class="info">
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                     <div class="waterfall-imgbox waterfall-box">
-                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img11.jpg') }}') }}" alt="#"></a>
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img11.jpg') }}" alt="#"></a>
                     </div>
                     <div class="waterfall-box">
                         <div class="waterfall-info waterfall-info__top">
@@ -236,11 +236,11 @@
                         </div>
                     </div>
                     <div class="waterfall-imgbox waterfall-box">
-                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img12.png') }}') }}" alt="#"></a>
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img12.png') }}" alt="#"></a>
                     </div>
                 </div>
                 <div class="main-waterfall__row clearfix">
-                    <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img13.jpg') }}') }}" alt="#"></a></div>
+                    <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img13.jpg') }}" alt="#"></a></div>
                     <div class="waterfall-box">
                         <div class="waterfall-info waterfall-info__top">
                             <i class="title"></i>
@@ -257,9 +257,9 @@
                             <i class="info-arrow info-arrow__right"></i>
                         </div>
                     </div>
-                    <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img14.png') }}') }}" alt="#"></a></div>
+                    <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img14.png') }}" alt="#"></a></div>
                     <div class="waterfall-imgbox waterfall-box">
-                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img15.jpg') }}') }}" alt="#"></a>
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img15.jpg') }}" alt="#"></a>
                         <div class="waterfall-collect">
                             <i class="title"></i>
                             <div class="info">
@@ -330,69 +330,51 @@
 <footer class="footer" id="footer">
     <div class="footer-column__wrapper">
         <div class="footer-column">
-            <a href="#" class="title">瓣瓣首页</a>
-            <a href="#">瓣瓣采集工具</a>
-            <a href="#">瓣瓣采集工具</a>
-        </div>
-        <div class="footer-column">
-            <a href="#" class="title">联系与合作</a>
-            <a href="#">联系我们</a>
-            <a href="#">用户反馈</a>
-            <a href="#">瓣瓣 LOGO 标准文档</a>
-        </div>
-        <div class="footer-column">
-            <a href="#" class="title">移动客户端</a>
-            <a href="#">瓣瓣 iPhone 版</a>
-            <a href="#">瓣瓣 Android 版</a>
-            <a href="#">瓣瓣 HD</a>
+            <img src="{{ asset('/img/index/home/social.png') }}" alt="#">
         </div>
         <div class="footer-column footer-followus">
-            <a href="#" class="title">关注我们</a>
-            <a href="#">新浪微博：1374310363@qq.com</a>
-            <a href="#">官方 QQ：1374310363</a>
-            <a href="#" class="weixin">官方微信：<img src="{{ asset('/img/index/home/footer-weixin.png') }}') }}" alt="#"><img src="{{ asset('/img/index/home/footer_weixin_orcode.png') }}') }}" alt="#" class="orcode"></a>
+            <b class="title">关注我们</b>
+            <p>新浪微博：1374310363@qq.com</p>
+            <p>个人 QQ：1374310363</p>
+            <p class="weixin">个人微信：<img src="{{ asset('/img/index/home/footer-weixin.png') }}" alt="#"></p>
+            <p class="weixin public_weixin">微信公众号：<img src="{{ asset('/img/index/home/footer-weixin.png') }}" alt="#" class="orcode"></p>
         </div>
     </div>
     <div class="footer-copyright">
-        <p>© Huaban *******限公司<span class="divider">|</span><a href="#">*******号</a></p>
+        <p>© 一飞知媛<span class="divider">|</span><i>{{ date('Y-m-d H:i:s') }}</i></p>
     </div>
 </footer>
 
 <div class="elevator-wrap">
-    <a href="javascript:;" id="elevator"></a>
-    <a href="javascript:;" id="plus"></a>
+    <p id="elevator"></p>
+    {{--<a href="javascript:;" id="plus"></a>
     <div id="plus_popup">
         <a href="#"><i class="icon-upload"></i>添加采集</a>
         <a href="#"><i class="icon-board"></i>添加画板</a>
         <a href="#"><i class="icon-tool"></i>安装采集工具</a>
-    </div>
+    </div>--}}
 </div>
 
 <div class="user" id="user">
     <div class="user-inner">
-        <img src="{{ asset('/img/index/home/login_logo.png') }}') }}" alt="#" class="login-logo">
+        <img src="{{ asset('/img/index/home/login_logo.png') }}" alt="#" class="login-logo">
         <div class="register">
             <div class="holder">
-                <div class="with-line"><span>用第三方帐号注册瓣瓣</span></div>
+                <div class="with-line"><span>用第三方帐号注册</span></div>
                 <div class="buttons">
-                    <a href="#" class="weibo"></a>
                     <a href="#" class="qq"></a>
                     <a href="#" class="weixin"></a>
-                    <a href="#" class="douban"></a>
                 </div>
                 <a href="#" class="use-email">使用手机号/邮箱注册</a>
             </div>
-            <div class="switch-login">已有帐号？<a href="#">登录到瓣瓣</a></div>
+            <div class="switch-login">已有帐号？<a href="#">请登录</a></div>
         </div>
         <div class="login">
             <div class="holder">
-                <div class="with-line"><span>用第三方帐号登录瓣瓣</span></div>
+                <div class="with-line"><span>用第三方帐号登录</span></div>
                 <div class="buttons">
-                    <a href="#" class="weibo"></a>
                     <a href="#" class="qq"></a>
                     <a href="#" class="weixin"></a>
-                    <a href="#" class="douban"></a>
-                    <a href="#" class="renren"></a>
                 </div>
                 <div class="with-line"><span>使用手机号/邮箱登录</span></div>
                 <div class="mail-login">
@@ -402,7 +384,7 @@
                 </div>
                 <div class="switch-register clearfix">
                     <a href="#" class="forget">忘记密码»</a>
-                    <p class="go-register">还没有瓣瓣帐号？<a href="#">点击注册»</a></p>
+                    <p class="go-register">还没有帐号？<a href="#">点击注册»</a></p>
                 </div>
             </div>
         </div>

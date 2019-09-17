@@ -28,7 +28,7 @@ Route::group(['prefix' => 'index', 'namespace' => 'Index'], function () {
     //resource操作
     Route::resource('operate', 'OperateController');
     //文章管理
-    Route::resource('articles', 'ArticlesController');
+    Route::resource('articles.html', 'IndexController@articleList');
 });
 
 

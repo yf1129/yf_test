@@ -22,8 +22,15 @@ class IndexController extends Controller
 //        $this->middleware('auth.admin')->only('indexView');
     }
 
+    //首页
     public function homeView()
     {
         return view('index.home');
+    }
+
+    //首页的文章列表
+    public function articleList()
+    {
+
     }
 }
