@@ -18,4 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('articleList', 'IndexController@homeView');
+//前端接口
+Route::group(['namespace' => 'API'], function () {
+    Route::get('/articleList/{count}', 'IndexController@articleList');
+});

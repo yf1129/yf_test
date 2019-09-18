@@ -14,6 +14,7 @@
 Auth::routes();
 
 include __DIR__.'/Admin/web.php';
+include __DIR__.'/Index/web.php';
 
 Route::get('/', function () {
     return view('index.home');

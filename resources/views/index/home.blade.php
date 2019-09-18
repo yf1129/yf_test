@@ -17,6 +17,7 @@
     <script src="{{ asset('lib/jQuery/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('lib/layui/layui.js') }}"></script>
     <script src="{{ asset('js/index/home/script.js') }}"></script>
+    <script src="{{ asset('js/index/home/home.js') }}"></script>
 </head>
 <body>
 
@@ -27,9 +28,9 @@
             <a href="#" class="header-logo"></a>
             <nav class="header-nav">
                 <a href="" class="item item-cur"><i class="layui-icon layui-icon-home"></i>首页</a>
-                <a href="#" class="item">最新</a>
-                <a href="#" class="item new-icon">美思<i></i></a>
-                <a href="#" class="item">教育</a>
+                <a href="#" class="item layui-icon layui-icon-fire">最新博客</a>
+                <a href="#" class="layui-icon layui-icon-edit item new-icon">心随笔<i></i></a>
+{{--                <a href="#" class="item">教育</a>--}}
                 {{--<a href="#" class="nav-more"></a>
                 <div class="nav-more__hover">
                     <div class="wrapper">
@@ -97,13 +98,13 @@
                 <span>大家正在关注</span>
             </div>
             <div class="main-list__wrapper clearfix">
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img1.jpg') }}" alt="#"><span>SD娃娃</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img2.jpg') }}" alt="#"><span>旧物改造</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img3.jpg') }}" alt="#"><span>古风海报</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img4.jpg') }}" alt="#"><span>简笔画</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img5.jpg') }}" alt="#"><span>夜景手机壁纸</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img6.jpg') }}" alt="#"><span>杨洋</span></a>
-                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img7.jpg') }}" alt="#"><span>条纹服饰</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img1.jpg') }}" alt="#"><span>PHP</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img2.jpg') }}" alt="#"><span>Go</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img3.jpg') }}" alt="#"><span>MySQL</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img4.jpg') }}" alt="#"><span>编程工具</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img5.jpg') }}" alt="#"><span>心得</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img6.jpg') }}" alt="#"><span>时间流浪</span></a>
+                <a href="#"><img src="{{ asset('/img/index/home/cont/main-list__img7.jpg') }}" alt="#"><span>那些年</span></a>
             </div>
         </div>
         <div class="main-waterfall">
@@ -111,11 +112,14 @@
                 <span>为您推荐</span>
             </div>
             <div class="main-waterfall__wrapper">
-                <div class="main-waterfall__row clearfix">
-                    <div class="waterfall-imgbox waterfall-box"><a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img1.jpg') }}" alt="#"></a></div>
+                <ul class="flow-default" style="height: 300px;" id="article_demo"></ul>
+
+                {{--<div class="main-waterfall__row clearfix">
+                    <div class="waterfall-imgbox waterfall-box">
+                        <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img1.jpg') }}" alt="#"></a>
+                    </div>
                     <div class="waterfall-box">
                         <div class="waterfall-info waterfall-info__top">
-                            <i class="title"></i>
                             <h3><a href="#">乐高蝙蝠侠大电影</a></h3>
                             <p><span>45 采集</span><span>119 粉丝</span></p>
                             <span>来自<a href="#">华纳兄弟电影</a></span>
@@ -268,7 +272,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
             <div class="getMore-line">
                 <a href="#">加载更多</a>
@@ -276,7 +280,7 @@
         </div>
         <div class="main-category">
             <div class="head clearfix">
-                <span>以分类浏览瓣瓣</span>
+                <span>工具栏</span>
                 <a href="#">所有采集 »</a>
             </div>
             <div class="cont clearfix">

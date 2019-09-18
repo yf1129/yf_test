@@ -31,4 +31,10 @@ Route::group(['prefix' => 'index', 'namespace' => 'Index'], function () {
     Route::resource('articles.html', 'IndexController@articleList');
 });
 
+//接口相关
+//Route::group(['prefix' => 'api', 'namespace' => $this->namespace, 'middleware' => 'api'], function () {
+//    文章管理
+//    Route::resource('articles', 'IndexController@articleList');
+//});
+
 

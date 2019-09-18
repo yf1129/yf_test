@@ -16,6 +16,6 @@ class Articles extends Model
 
     public function user()
     {
-        return $this->belongsTo("App\User", 'article_id', 'uid');
+        return $this->belongsTo("App\Model\User", 'uid');
     }
 }
