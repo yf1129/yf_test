@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //前端接口
 Route::group(['namespace' => 'API'], function () {
-    Route::get('/articleList/{count}', 'IndexController@articleList');
+    Route::get('/articleList', 'IndexController@articleList');
 });

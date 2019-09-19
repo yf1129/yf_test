@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 
 @section('content')
+    <link rel="stylesheet" href="{{ asset('css/admin/articles/index.css') }}">
 
     <div class="layui-tab">
         <ul class="layui-tab-title">
@@ -33,7 +34,7 @@
                             <td>
                                 <a class="" href="javascript:;">{{ mb_strlen($d['article_describe']) > 8 ? mb_substr($d['article_describe'], 0, 8).'...' : $d['article_describe'] }}</a>
                             </td>
-                            <td><img src="data:image/png;base64,{{ ($d['preview_photo']) }}" alt=""></td>
+                            <td><img src="data:image/png;base64,{{ ($d['article_images']) }}" alt=""></td>
                             <td>{{ $d['is_hot'] === 2 ? '热门': '非热门' }}</td>
                             <td>{{ $d['is_recommended'] === 2 ? '推荐': '非推荐' }}</td>
                             <td>{{ $d['is_delete'] === 2 ? '已删除' : '未删除' }}</td>

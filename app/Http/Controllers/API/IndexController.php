@@ -14,11 +14,13 @@ use App\Model\Index\Articles;
 class IndexController extends BaseController
 {
     //首页的文章列表
-    public function articleList($count)
+    public function articleList($count = 10)
     {
-        $totalNum = Articles::where('is_recommended', 2)->count();
-        $totalPage = ceil($totalNum/$count);
-        $result = Articles::where('is_recommended', 2)->orderBy('article_id', 'desc')->limit($count)->get();
+        $results = Articles::where('is_recommended', 2)->where('is_delete', 1)->orderBy('article_id', 'desc')->paginate($count);
+        $totalNum = $results->total(); //总数目
+        $totalPage = $results->lastPage(); //总页码数
+//        $counts = Articles::where('is_recommended', 2)->where('is_delete', 1)->orderBy('article_id', 'desc')->total();
+        $result = $results->all();
         $data = [];
         if (!empty($result)) {
             $i = 0;

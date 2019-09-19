@@ -112,9 +112,9 @@
                 <span>为您推荐</span>
             </div>
             <div class="main-waterfall__wrapper">
-                <ul class="flow-default" style="height: 300px;" id="article_demo"></ul>
+                <ul class="flow-default"  id="article_demo"></ul>
 
-                {{--<div class="main-waterfall__row clearfix">
+               {{-- <div class="main-waterfall__row clearfix">
                     <div class="waterfall-imgbox waterfall-box">
                         <a href="#"><img src="{{ asset('/img/index/home/cont/waterfall_img1.jpg') }}" alt="#"></a>
                     </div>
@@ -274,9 +274,9 @@
                     </div>
                 </div>--}}
             </div>
-            <div class="getMore-line">
+           {{-- <div class="getMore-line">
                 <a href="#">加载更多</a>
-            </div>
+            </div>--}}
         </div>
         <div class="main-category">
             <div class="head clearfix">
